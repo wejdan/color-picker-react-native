@@ -9,13 +9,23 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@csstools/convert-colors": "^2.0.0",
     "expo": "~47.0.9",
+    "expo-clipboard": "~4.0.1",
+    "expo-gl": "~12.0.1",
     "expo-status-bar": "~1.4.2",
+    "gl-react": "^5.2.0",
+    "gl-react-expo": "^5.2.1",
     "react": "18.1.0",
-    "react-native": "0.70.5"
+    "react-native": "0.70.5",
+    "react-native-gesture-handler": "~2.8.0",
+    "react-native-reanimated": "~2.12.0",
+    "react-native-redash": "^18.1.0",
+    "react-native-svg": "13.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@types/react": "^18.0.26"
   },
   "private": true
 }
