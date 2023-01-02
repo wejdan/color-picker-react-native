@@ -1,39 +1,15 @@
-import { StyleSheet, Text, Dimensions, View } from "react-native";
+import { StyleSheet, Dimensions, View } from "react-native";
 import React from "react";
 import Animated, {
   useSharedValue,
-  interpolate,
-  Extrapolate,
-  withSpring,
   useAnimatedStyle,
   withTiming,
-  withRepeat,
-  withDecay,
-  runOnJS,
-  runOnUI,
   useDerivedValue,
-  interpolateColor,
-  useAnimatedReaction,
-  useAnimatedGestureHandler,
-  defineAnimation,
-  useAnimatedProps,
-  interpolateColors,
 } from "react-native-reanimated";
-import {
-  TapGestureHandler,
-  GestureHandlerRootView,
-  Gesture,
-  GestureDetector,
-  PanGestureHandler,
-  State,
-  PanGestureHandlerGestureEvent,
-  ScrollView,
-} from "react-native-gesture-handler";
-import Svg, { Path } from "react-native-svg";
-import { hsv2color } from "react-native-redash";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+
 const { height, width } = Dimensions.get("window");
 const CURSOR_WIDTH = 50;
-
 const SIZE = width * 0.8 - 0;
 
 const r = SIZE / 2;

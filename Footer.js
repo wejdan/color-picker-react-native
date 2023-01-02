@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  Text,
   ToastAndroid,
   View,
   TextInput,

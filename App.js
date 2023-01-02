@@ -1,34 +1,11 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, Dimensions, View } from "react-native";
-import {
-  TapGestureHandler,
-  GestureHandlerRootView,
-  Gesture,
-  GestureDetector,
-  PanGestureHandler,
-  State,
-  PanGestureHandlerGestureEvent,
-} from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import React, { useState } from "react";
 
-import Animated, {
+import {
   useSharedValue,
-  interpolate,
-  Extrapolate,
-  withSpring,
-  useAnimatedStyle,
-  withTiming,
-  withRepeat,
-  withDecay,
   runOnJS,
-  runOnUI,
   useDerivedValue,
-  interpolateColor,
-  useAnimatedReaction,
-  useAnimatedGestureHandler,
-  defineAnimation,
-  useAnimatedProps,
-  interpolateColors,
 } from "react-native-reanimated";
 import Circle from "./Circle";
 import Cursor from "./Cursor";
@@ -43,13 +20,8 @@ import {
 } from "./colorConvert";
 const { height, width } = Dimensions.get("window");
 
-const cx = width / 2;
-const cy = height / 2;
-
 const SIZE = width * 0.8;
-
 const r = SIZE / 2;
-const C = r * Math.PI * 2;
 
 export default function App() {
   const h = useSharedValue(0);

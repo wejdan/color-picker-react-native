@@ -1,17 +1,13 @@
-import { StyleSheet, Image, Text, Dimensions, View } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import React from "react";
-//import Cursor from './Cursor';
+
 import { GLSL, Node, Shaders } from "gl-react";
 import { Surface } from "gl-react-expo";
 const { height, width } = Dimensions.get("window");
 
-const cx = width / 2;
-const cy = height / 2;
-
 const SIZE = width * 0.8;
 
 const r = SIZE / 2;
-const C = r * Math.PI * 2;
 
 const shaders = Shaders.create({
   hue: {
