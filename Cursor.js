@@ -64,15 +64,12 @@ const Cursor = ({ v, h, s, backgroundColor }) => {
     isPicking.value = true;
   });
   gesture.onUpdate((e) => {
-    const tmpx = e.translationX + offsetX.value;
-    const tmpy = e.translationY + offsetY.value;
+    const fingerX = e.translationX + offsetX.value;
+    const fingerY = e.translationY + offsetY.value;
 
-    const tmpDistance = distance(tmpx, tmpy);
-    const saturation = Math.min((tmpDistance / r) * 100, 100);
-    const a = angle(tmpx, tmpy);
-
-    h.value = a;
-    s.value = saturation;
+    const d = distance(fingerX, fingerY);
+    s.value = Math.min((d / r) * 100, 100);
+    h.value = angle(fingerX, fingerY);
   });
   gesture.onEnd(() => {
     isPicking.value = false;
