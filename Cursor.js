@@ -38,17 +38,14 @@ function distance(x, y) {
   var c = Math.sqrt(a * a + b * b);
   return c;
 }
-const Cursor = ({ v, h, s, backgroundColor }) => {
+const Cursor = ({ h, s, backgroundColor }) => {
   const x = useDerivedValue(() => {
     const raduis = s.value * r;
-    const tmpx = r + raduis * Math.cos(degrees_to_radians(h.value));
-
-    return tmpx;
+    return r + raduis * Math.cos(degrees_to_radians(h.value));
   });
   const y = useDerivedValue(() => {
     const raduis = s.value * r;
-    const tmpy = r + raduis * Math.sin(degrees_to_radians(h.value));
-    return tmpy;
+    return r + raduis * Math.sin(degrees_to_radians(h.value));
   });
 
   const isPicking = useSharedValue(false);

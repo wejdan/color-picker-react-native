@@ -2,42 +2,19 @@ import { StyleSheet, Text, Dimensions, StatusBar, View } from "react-native";
 import React from "react";
 import Animated, {
   useSharedValue,
-  interpolate,
-  Extrapolate,
-  withSpring,
   useAnimatedStyle,
-  withTiming,
-  withRepeat,
-  withDecay,
   runOnJS,
-  runOnUI,
   useDerivedValue,
-  interpolateColor,
-  useAnimatedReaction,
-  useAnimatedGestureHandler,
-  defineAnimation,
-  useAnimatedProps,
-  interpolateColors,
 } from "react-native-reanimated";
-import {
-  TapGestureHandler,
-  GestureHandlerRootView,
-  Gesture,
-  GestureDetector,
-  PanGestureHandler,
-  State,
-  PanGestureHandlerGestureEvent,
-  ScrollView,
-} from "react-native-gesture-handler";
-import Svg, { Path } from "react-native-svg";
-import { hsv2color } from "react-native-redash";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+
 const { height, width } = Dimensions.get("window");
 const clamp = (value, min, max) => {
   "worlet";
   return Math.max(Math.min(value, max), min);
 };
 const CURSOR_WIDTH = 20;
-const Header = ({ h, s, v, setShaderValue, backgroundColor }) => {
+const Header = ({ v, setShaderValue, backgroundColor }) => {
   const x = useDerivedValue(() => {
     return v.value * width - CURSOR_WIDTH / 2;
   });
