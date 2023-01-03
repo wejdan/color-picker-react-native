@@ -10,7 +10,7 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 const { height, width } = Dimensions.get("window");
 const CURSOR_WIDTH = 50;
-const SIZE = width * 0.8 - 0;
+const SIZE = width * 0.8;
 
 const r = SIZE / 2;
 function angle(ex, ey) {
