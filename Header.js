@@ -39,7 +39,7 @@ const clamp = (value, min, max) => {
 const CURSOR_WIDTH = 20;
 const Header = ({ h, s, v, setShaderValue, backgroundColor }) => {
   const x = useDerivedValue(() => {
-    return (v.value * width) / 100 - CURSOR_WIDTH / 2;
+    return v.value * width - CURSOR_WIDTH / 2;
   });
 
   useDerivedValue(() => {
@@ -58,13 +58,9 @@ const Header = ({ h, s, v, setShaderValue, backgroundColor }) => {
       width - CURSOR_WIDTH / 2
     );
     x.value = tmpX;
-    v.value = Math.min((tmpX / width) * 100, 100);
-    //  console.log("x", Math.min(tmpX / width, 1));
+    v.value = Math.min(tmpX / width, 1);
   });
   const containerStyle = useAnimatedStyle(() => {
-    var l = ((2 - s.value / 100) * v.value) / 2;
-    const s1 = (s.value * v.value) / (l < 50 ? l * 2 : 200 - l * 2);
-    //   cursorColor.value = `hsl(${h.value},${100 - s1}%,${100 - l}%)`;
     return {
       backgroundColor: backgroundColor.value,
     };

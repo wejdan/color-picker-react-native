@@ -40,15 +40,14 @@ function distance(x, y) {
 }
 const Cursor = ({ v, h, s, backgroundColor }) => {
   const x = useDerivedValue(() => {
-    const raduis = (s.value / 100) * r;
+    const raduis = s.value * r;
     const tmpx = r + raduis * Math.cos(degrees_to_radians(h.value));
 
     return tmpx;
   });
   const y = useDerivedValue(() => {
-    const raduis = (s.value / 100) * r;
+    const raduis = s.value * r;
     const tmpy = r + raduis * Math.sin(degrees_to_radians(h.value));
-
     return tmpy;
   });
 
@@ -68,7 +67,7 @@ const Cursor = ({ v, h, s, backgroundColor }) => {
     const fingerY = e.translationY + offsetY.value;
 
     const d = distance(fingerX, fingerY);
-    s.value = Math.min((d / r) * 100, 100);
+    s.value = Math.min(d / r, 1);
     h.value = angle(fingerX, fingerY);
   });
   gesture.onEnd(() => {

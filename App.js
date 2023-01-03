@@ -17,6 +17,8 @@ import {
   rgbToHex,
   hexToRgb,
   hsl2hsv,
+  HSVtoRGB,
+  rgbToHsv,
 } from "./colorConvert";
 const { height, width } = Dimensions.get("window");
 
@@ -26,34 +28,24 @@ const r = SIZE / 2;
 export default function App() {
   const h = useSharedValue(0);
   const s = useSharedValue(0);
-  const v = useSharedValue(100);
+  const v = useSharedValue(1);
   const [ShaderValue, setShaderValue] = useState(1.0);
   const [hexText, sethexText] = useState("");
 
   const backgroundColor = useDerivedValue(() => {
-    var l = ((2 - s.value / 100) * v.value) / 2;
-    let s1 = (s.value * v.value) / (l < 50 ? l * 2 : 200 - l * 2);
-    if (isNaN(s1)) {
-      s1 = 0;
-    }
-
-    const rgb = hslToRgb((360 - h.value) / 360, s1 / 100, l / 100);
-    const hex = rgbToHex(rgb[0], rgb[1], rgb[2]);
+    const rgb = HSVtoRGB((360 - h.value) / 360, s.value, v.value);
+    const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
     runOnJS(sethexText)(hex);
 
-    return `hsl(${360 - h.value},${s1}%,${l}%)`;
+    return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
   });
   const onTextChange = (text) => {
     const rgb = hexToRgb(text);
     if (rgb) {
-      const hsl = rgbToHsl(rgb.r, rgb.b, rgb.g);
-      const hsv = hsl2hsv(hsl[0] * 360, hsl[1] * 100, hsl[2] * 100);
-      h.value = hsv[0];
-      s.value = hsv[1];
-      v.value = hsv[2];
-
-      console.log("textChange", rgb, hsl, hsv);
-      console.log("old hsl", backgroundColor.value);
+      const hsv = rgbToHsv(rgb.r, rgb.g, rgb.b);
+      h.value = hsv.h;
+      s.value = hsv.s;
+      v.value = hsv.v;
     }
 
     sethexText(text);
