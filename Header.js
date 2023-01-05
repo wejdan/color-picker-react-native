@@ -24,7 +24,6 @@ const Header = ({ v, h, s, setShaderValue, backgroundColor }) => {
     runOnJS(setShaderValue)(x.value / width);
   });
   const offsetX = useSharedValue(0);
-  const cursorColor = useSharedValue("white");
   const gesture = Gesture.Pan();
   gesture.onBegin(() => {
     offsetX.value = x.value;
@@ -32,8 +31,8 @@ const Header = ({ v, h, s, setShaderValue, backgroundColor }) => {
   gesture.onUpdate((e) => {
     const tmpX = clamp(
       e.translationX + offsetX.value,
-      CURSOR_WIDTH / 2,
-      width - CURSOR_WIDTH / 2
+      CURSOR_WIDTH,
+      width - CURSOR_WIDTH
     );
     x.value = tmpX;
     v.value = Math.min(tmpX / width, 1);
