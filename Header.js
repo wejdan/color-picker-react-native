@@ -7,14 +7,15 @@ import Animated, {
   useDerivedValue,
 } from "react-native-reanimated";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-
+import { HSVtoRGB, HueShift } from "./colorConvert";
 const { height, width } = Dimensions.get("window");
 const clamp = (value, min, max) => {
   "worlet";
   return Math.max(Math.min(value, max), min);
 };
 const CURSOR_WIDTH = 20;
-const Header = ({ v, setShaderValue, backgroundColor }) => {
+
+const Header = ({ v, h, s, setShaderValue, backgroundColor }) => {
   const x = useDerivedValue(() => {
     return v.value * width - CURSOR_WIDTH / 2;
   });
@@ -42,70 +43,59 @@ const Header = ({ v, setShaderValue, backgroundColor }) => {
       backgroundColor: backgroundColor.value,
     };
   });
-  const rnStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: x.value - 25 }],
-    };
-  });
+
   const cursorStyle = useAnimatedStyle(() => {
+    const newHue = HueShift(h.value, 180);
+    const rgb = HSVtoRGB((360 - newHue) / 360, 100, 100);
+
     return {
-      backgroundColor: cursorColor.value,
+      backgroundColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`,
+      transform: [{ translateX: x.value - CURSOR_WIDTH / 2 }],
     };
   });
   return (
-    <Animated.View
-      style={[
-        {
-          paddingTop: StatusBar.currentHeight,
-          height: 100,
-          borderRadius: 15,
-          justifyContent: "flex-end",
-        },
-        containerStyle,
-      ]}
-    >
-      <View
-        style={{
-          position: "absolute",
-          height: 50,
-          justifyContent: "center",
-          alignItems: "center",
-          width: width,
-        }}
+    <GestureDetector gesture={gesture}>
+      <Animated.View
+        style={[
+          {
+            paddingTop: StatusBar.currentHeight,
+            height: 100,
+            borderRadius: 15,
+            justifyContent: "flex-end",
+          },
+          containerStyle,
+        ]}
       >
         <View
           style={{
-            height: 2,
-            width: width - 20,
-            backgroundColor: "#3e3e3e",
+            position: "absolute",
+            height: CURSOR_WIDTH,
+            justifyContent: "center",
+            alignItems: "center",
+            width: width,
           }}
-        />
-      </View>
-      <GestureDetector gesture={gesture}>
+        >
+          <View
+            style={{
+              height: 2,
+              width: width - 20,
+              backgroundColor: "#3e3e3e",
+            }}
+          />
+        </View>
+
         <Animated.View
           style={[
             {
-              width: 50,
-              height: 50,
-              justifyContent: "center",
-              alignItems: "center",
+              width: CURSOR_WIDTH,
+              height: CURSOR_WIDTH,
+              borderRadius: CURSOR_WIDTH / 2,
             },
-            rnStyle,
+            cursorStyle,
           ]}
-        >
-          <Animated.View
-            style={[
-              {
-                width: CURSOR_WIDTH,
-                height: CURSOR_WIDTH,
-                borderRadius: CURSOR_WIDTH / 2,
-              },
-              cursorStyle,
-            ]}
-          />
-        </Animated.View>
-      </GestureDetector>
-    </Animated.View>
+        />
+      </Animated.View>
+    </GestureDetector>
   );
 };
 

@@ -54,6 +54,14 @@ export function rgbToHsl(r, g, b) {
 
   return [h, s, l];
 }
+export function HueShift(h, s) {
+  "worklet";
+  h += s;
+  while (h >= 360.0) h -= 360.0;
+  while (h < 0.0) h += 360.0;
+  return h;
+}
+
 export function rgbToHsv(r, g, b) {
   "worklet";
   const hsl = rgbToHsl(r, b, g);
